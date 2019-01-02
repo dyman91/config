@@ -1,0 +1,313 @@
+services:
+  kir-service-url: ${KIR_SERVICE_URL:http://kir-service:6020}
+  bluemedia-service-url: ${BLUEMEDIA_SERVICE_URL:http://bluemedia-service:8585}
+  cim-url: ${CIM_URL:http://localhost:9090/pantera/api}
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 30000
+logging:
+  level:
+    org.zalando.logbook: TRACE
+
+  file: ${LOGS_FILE_PATH:C:/Microservices/apps/pantera/acn-identity/}${LOGS_FILE_NAME:logs.log}
+  file.max-size: ${FILE_LOG_MAX_SIZE:100MB}
+
+spring:
+  application:
+    name: kir-service
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+identity-providers-conf:
+
+  attributeGroups:
+  -
+    groupId: "1"
+    attributes:
+    -
+      id: "pesel"
+    -
+      id: "firstName"
+    -
+      id: "lastName"
+  -
+    groupId: "2"
+    attributes:
+    - id: "pesel"
+
+    - id: "firstName"
+
+    - id: "lastName"
+
+    - id: "dateOfBirth"
+  -
+    groupId: "3"
+    attributes:
+    - id: "pesel"
+
+    - id: "firstName"
+
+    - id: "lastName"
+
+    - id: "dateOfBirth"
+
+    - id: "placeOfBirth"
+
+    - id: "countryOfBirth"
+
+  - groupId: "default"
+    attributes:
+      - id: "pesel"
+      - id: "lastName"
+      - id: "firstName"
+      - id: "dateOfBirth"
+      - id: "placeOfBirth"
+      - id: "countryOfBirth"
+      - id: "citizenships"
+      - id: "idDocumentType"
+      - id: "idDocumentNumber"
+      - id: "idDocumentIssueDate"
+      - id: "idDocumentExDate"
+      - id: "contactInfoMobilePhone"
+      - id: "contactInfoPhone"
+      - id: "contactInfoEmail"
+      - id: "currentAddressStreetName"
+      - id: "currentAddressLocator"
+      - id: "currentAddressPostCode"
+      - id: "currentAddressPostName"
+      - id: "currentAddressCountryName"
+      - id: "mailAddressStreetName"
+      - id: "mailAddressLocator"
+      - id: "mailAddressPostCode"
+      - id: "mailAddressPostName"
+      - id: "mailAddressCountryName"
+      - id: "customTimeSpan"
+      - id: "customConfirmedMobilePhone"
+      - id: "customAccountNumber"
+      - id: "majority"
+      - id: "gender"
+      - id: "maidenName"
+      - id: "fatherName"
+      - id: "motherName"
+      - id: "height"
+      - id: "eyesColour"
+
+  authenticationProviders:
+    -
+      name: "KIR"
+      type: "BANK"
+    -
+      name: "BLUEMEDIA"
+      type: "BANK"
+
+  identityProviderAttributesConf:
+    -
+      id: "KIR"
+      attributes:
+        -
+          id: "pesel"
+          name: "PersonIdentifier"
+        -
+          id: "lastName"
+          name: "CurrentFamilyName"
+        -
+          id: "firstName"
+          name: "CurrentGivenName"
+        -
+          id: "dateOfBirth"
+          name: "DateOfBirth"
+        -
+          id: "placeOfBirth"
+          name: "PlaceOfBirth"
+        -
+          id: "countryOfBirth"
+          name: "CountryOfBirth"
+        -
+          id: "citizenships"
+          name: "Citizenships"
+        -
+          id: "idDocumentType"
+          name: "IdDocumentType"
+        -
+          id: "idDocumentNumber"
+          name: "IdDocumentNumber"
+        -
+          id: "idDocumentIssueDate"
+          name: "IdDocumentIssueDate"
+        -
+          id: "idDocumentExDate"
+          name: "IdDocumentExDate"
+        -
+          id: "contactInfoMobilePhone"
+          name: "ContactInfoMobilePhone"
+        -
+          id: "contactInfoPhone"
+          name: "ContactInfoPhone"
+        -
+          id: "contactInfoEmail"
+          name: "ContactInfoEmail"
+        -
+          id: "currentAddressStreetName"
+          name: "CurrentAddressStreetName"
+        -
+          id: "currentAddressLocator"
+          name: "CurrentAddressLocator"
+        -
+          id: "currentAddressPostCode"
+          name: "CurrentAddressPostCode"
+        -
+          id: "currentAddressPostName"
+          name: "CurrentAddressPostName"
+        -
+          id: "currentAddressCountryName"
+          name: "CurrentAddressCountryName"
+        -
+          id: "mailAddressStreetName"
+          name: "MailAddressStreetName"
+        -
+          id: "mailAddressLocator"
+          name: "MailAddressLocator"
+        -
+          id: "mailAddressPostCode"
+          name: "MailAddressPostCode"
+        -
+          id: "mailAddressPostName"
+          name: "MailAddressPostName"
+        -
+          id: "mailAddressCountryName"
+          name: "MailAddressCountryName"
+        -
+          id: "customTimeSpan"
+          name: "CustomTimeSpan"
+        -
+          id: "customConfirmedMobilePhone"
+          name: "CustomConfirmedMobilePhone"
+        -
+          id: "customAccountNumber"
+          name: "CustomAccountNumber"
+        -
+          id: "Majority"
+          name: "Majority"
+        -
+          id: "gender"
+          name: "Gender"
+    -
+      id: "BLUEMEDIA"
+      attributes:
+        -
+          id: "pesel"
+          name: "pesel"
+        -
+          id: "firstName"
+          name: "firstName"
+        -
+          id: "lastName"
+          name: "lastName"
+        -
+          id: "mailAddressStreetName"
+          name: "address.street"
+        -
+          id: "mailAddressLocator"
+          name: "address.houseNumber"
+        -
+          id: "mailAddressPostCode"
+          name: "address.postalCode"
+        -
+          id: "mailAddressPostName"
+          name: "address.city"
+
+  callers:
+
+  -
+    id: "atg"
+    positiveUrl: ${ATG_POSITIVE_URL:http://localhost:9090/success.html}
+    negativeUrl: ${ATG_NEGATIVE_URL:http://localhost:9090/failure.html}
+
+  -
+    id: "t-app"
+    positiveUrl: ${T_APP_POSITIVE_URL:http://localhost:9090/success.html}
+    negativeUrl: ${T_APP_NEGATIVE_URL:http://localhost:9090/failure.html}
+
+  serviceProviders:
+    #     Service provider LIST
+    - id: "web-app"
+      identityProviderGroups:
+        - #         GROUP LIST
+          id: "1"
+          identityProviders:
+            - identityProviderId: MBANK
+              identityProviderName: mBank SA
+              authenticationProvider: KIR
+            - identityProviderId: PKO
+              identityProviderName: PKO Bank Polski
+              authenticationProvider: KIR
+            - identityProviderId: Alior
+              identityProviderName: Alior Bank SA
+              authenticationProvider: KIR
+        - id: "2"
+          identityproviders:
+            - identityProviderId: ING
+              identityProviderName: ING Bank Śląski
+              authenticationProvider: BLUEMEDIA
+            - identityProviderId: BGŻ
+              identityProviderName: Bank BGŻ BNP Paribas
+              authenticationProvider: BLUEMEDIA
+            - identityProviderId: MBANK
+              identityProviderName: mBank SA
+              authenticationProvider: KIR
+    - id: "t-app"
+      identityProviderGroups:
+        - id: "1"
+          identityproviders:
+            - identityProviderId: MBANK
+              identityProviderName: mBank SA
+              authenticationProvider: KIR
+            - identityProviderId: PKO
+              identityProviderName: PKO Bank Polski
+              authenticationProvider: KIR
+            - identityProviderId: Alior
+              identityProviderName: Alior Bank
+              authenticationProvider: KIR
+        - id: "2"
+          identityproviders:
+            - identityProviderId: ING
+              identityProviderName: ING Bank Śląski
+              authenticationProvider: BLUEMEDIA
+            - identityProviderId: BGŻ
+              identityProviderName: Bank BGŻ BNP Paribas
+              authenticationProvider: BLUEMEDIA
+        - id: "3"
+          identityproviders:
+            - identityProviderId: ING
+              identityProviderName: ING Bank Śląski
+              authenticationProvider: BLUEMEDIA
+    - id: "default"
+      identityProviderGroups:
+        - id: "1"
+          identityproviders:
+            - identityProviderId: MBANK
+              identityProviderName: mBank SA
+              authenticationProvider: KIR
+            - identityProviderId: PKO
+              identityProviderName: PKO Bank Polski
+              authenticationProvider: KIR
+            - identityProviderId: Alior
+              identityProviderName: Alior Bank SA
+              authenticationProvider: KIR
+            - identityProviderId: ING
+              identityProviderName: ING Bank Śląski
+              authenticationProvider: BLUEMEDIA
+            - identityProviderId: BGŻ
+              identityProviderName: Bank BGŻ BNP Paribas
+              authenticationProvider: BLUEMEDIA
+
+
+circuit-breaker:
+  kirReturnedTokensPercentRatio:   ${KIR_CIRCUT_BREAKER_RETURNED_TOKENS_PERCENT_RATIO:50}
+  kirPositiveArtifactResponsePercentRatio: ${KIR_CIRCUT_BREAKER_ARTIFACT_RESPONSE_PERCENT_RATIO:100}
+  bluemediaReturnedDataPercentRatio: ${BLUEMEDIA_CIRCUT_BREAKER_RETURNED_DATA_PERCENT_RATIO:50}
+  bluemediaPositiveStartPercentRatio: ${BLUEMEDIA_CIRCUT_BREAKER_POSITIVE_START_PERCENT_RATIO:100}
+  requestedPeriodInMinutes: ${KIR_CIRCUT_BREAKER_REQUESTED_PERIOD_IN_MINUTES:15}
+  tolerancePeriodInMinutes: ${KIR_CIRCUT_BREAKER_TOLERANCE_PERIOD_IN_MINUTES:2}
+  minSamples:               ${KIR_CIRCUT_BREAKER_MINIMUM_SAMPLES:3}
+  checkFrequencyPeriod:     ${CIRCUT_BREAKER_CHECK_FREQUENCY_PERIOD_IN_MINUTES:1}

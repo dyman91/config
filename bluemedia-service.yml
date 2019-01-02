@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: bluemedia-service
+server:
+  servlet:
+    context-path:
+  port: ${BLUEMEDIA_SERVICE_PORT:8585}
+
+bluemedia:
+  service:
+    url: ${BLUEMEDIA_SERVICE_URL:https://idbl-accept.blue.pl/api}
+    secret.key: ${BLUEMEDIA_SERVICE_SECRET_KEY:NYrWmZQ3}
+    separator: ${BLUEMEDIA_SERVICE_SEPARATOR:|}
+    sid: ${BLUEMEDIA_SERVICE_ID:TMOBILE_TEST_3}
+    email: ${BLUEMEDIA_REQUEST_MAIL:mail@mail.com}

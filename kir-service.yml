@@ -1,0 +1,26 @@
+database:
+  service:
+    url: ${DATBASE_HOSTNAME_AND_PORT:localhost:6000}
+server:
+  servlet:
+    context-path: /
+  port: 6020
+
+kir-config:
+
+  service:
+      destinationServiceUrl:                  ${DESTINATION_CONSUMER_SERVICE_URL:https://in-idwall.mojeid.pl/wb-frontend/SAML/SingleSignOnService}
+      assertionConsumerServiceUrl:            ${ASSERTION_CONSUMER_SERVICE_URL:https://35.227.127.193/singleSignOnService}
+      artifactResolutionSerivceUrl:           ${ARTIFACT_RESOLUTION_SERVICE_URL:https://in-idwall.mojeid.pl/wb-frontend/SAML/artifactResolveService}
+      relyingPartyIdentifier:                 ${RELYING_PARTY_IDENTIFIER:https://cim.acc.pl/SAML2}
+      authnRequestContextDescription:         ${AUTHN_REQUEST_CONTEXT_DESCRIPTION:Rejestracja uzytkownika w serwisie TMobile}
+      authnRequestContextClass:               ${AUTHN_REQUEST_CONTEXT_CLASS:AUTHENTICATION}
+      responseIssuer:                         ${RESPONSE_ISSUER:https://wb.kir.pl}
+      keyStorePath:                           ${KEY_STORE_PATH:keystore.jks}
+      keyStorePasswd:                         ${KEY_STORE_PASSWD:mieszko1}
+      signKeyPairName:                        ${SIGN_KEY_PAIR_NAME:ACCENTURE_P}
+      encryptKeyPairName:                     ${ENCRYPT_KEY_PAIR_NAME:ACCENTURE_S}
+      kirX509CertName:                        ${KIR_X509_CERT_NAME:kir}
+      spanIdLength:                           ${SPAN_ID_LENGTH:6}
+
+

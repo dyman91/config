@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: dispatcher-service
+server:
+  servlet:
+    context-path: /
+  port: ${DISPATCHER_SERVICE_PORT:8762}

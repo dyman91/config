@@ -1,0 +1,6 @@
+services:
+  bluemedia-service-url: http://localhost:8585
+  kir-service-url: http://localhost:6020
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 30000
