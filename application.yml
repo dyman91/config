@@ -292,7 +292,7 @@ identity-providers-conf:
               identityProviderName: PKO Bank Polski
               authenticationProvider: KIR
             - identityProviderId: Alior
-              identityProviderName: Alior Bank
+              identityProviderName: Alior Bank SA
               authenticationProvider: KIR
             - identityProviderId: ING
               identityProviderName: ING Bank Śląski
